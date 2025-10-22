@@ -16,7 +16,12 @@ int	dispatch_specifier(char c, va_list args)
 	else if (c == 'i')
 	{
         size_t val = va_arg(args, int);
-        ft_putnbr_fd(val, 1);
+        if(val > 0)
+        {
+            ft_putnbr_fd(val, 1);
+        }
+      
+
 		return (ft_int_len(val));
 	}
 	else if (c == 's')

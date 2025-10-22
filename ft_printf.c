@@ -1,13 +1,13 @@
 #include "ft_printf.h"
+#include "libft.h"
 
 int ft_printf(const char *format, ...)
 {
-    int i;
     int count;
     va_list args;
 
     if (!format)
-        return NULL;
+        return (0);
     va_start(args, format);
     count = 0;
     while (format)
