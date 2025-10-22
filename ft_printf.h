@@ -4,6 +4,8 @@
 #include <unistd.h>
 #include <stdarg.h>
 
+int	ft_int_len(int n);
+
 int ft_printf(const char *, ...);
 int dispatch_specifier(char c, va_list args);
 
