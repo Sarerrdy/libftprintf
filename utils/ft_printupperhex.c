@@ -1,40 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_printupperhex.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eina <eina@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/24 17:55:23 by eina              #+#    #+#             */
-/*   Updated: 2025/10/24 23:13:22 by eina             ###   ########.fr       */
+/*   Created: 2025/10/24 18:50:31 by eina              #+#    #+#             */
+/*   Updated: 2025/10/24 19:27:47 by eina             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printf(const char *format, ...)
+int	ft_printupperhex(uintptr_t n, int fd)
 {
-	int		count;
-	va_list	args;
+	char	*base;
 
-	if (!format)
-		return (0);
-	va_start(args, format);
-	count = 0;
-	while (*format)
-	{
-		if (*format == '%')
-		{
-			format++;
-			count += ft_dispatch_specifier(*format, args);
-		}
-		else
-		{
-			ft_putchar_fd(*format, 1);
-			count++;
-		}
-		format++;
-	}
-	va_end(args);
-	return (count);
+	base = "0123456789ABCDEF";
+	if (n >= 16)
+		ft_printupperhex((n / 16), 1);
+	ft_putchar_fd(base[n % 16], fd);
+	return (ft_hex_len(n));
 }

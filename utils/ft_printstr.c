@@ -1,40 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_printstr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eina <eina@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/24 17:55:23 by eina              #+#    #+#             */
-/*   Updated: 2025/10/24 23:13:22 by eina             ###   ########.fr       */
+/*   Created: 2025/10/24 17:56:30 by eina              #+#    #+#             */
+/*   Updated: 2025/10/25 00:12:20 by eina             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *format, ...)
+int	ft_printstr(char *str, int fd)
 {
-	int		count;
-	va_list	args;
-
-	if (!format)
-		return (0);
-	va_start(args, format);
-	count = 0;
-	while (*format)
-	{
-		if (*format == '%')
-		{
-			format++;
-			count += ft_dispatch_specifier(*format, args);
-		}
-		else
-		{
-			ft_putchar_fd(*format, 1);
-			count++;
-		}
-		format++;
-	}
-	va_end(args);
-	return (count);
+	if (!str)
+		str = "(null)";
+	ft_putstr_fd(str, fd);
+	return (ft_strlen(str));
 }

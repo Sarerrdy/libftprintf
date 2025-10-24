@@ -1,40 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_unsigned_len.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eina <eina@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/24 17:55:23 by eina              #+#    #+#             */
-/*   Updated: 2025/10/24 23:13:22 by eina             ###   ########.fr       */
+/*   Created: 2025/10/24 17:55:49 by eina              #+#    #+#             */
+/*   Updated: 2025/10/24 17:55:54 by eina             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "printf.h"
 
-int	ft_printf(const char *format, ...)
+unsigned int	ft_unsigned_len(unsigned int n)
 {
-	int		count;
-	va_list	args;
+	unsigned int	len;
 
-	if (!format)
-		return (0);
-	va_start(args, format);
-	count = 0;
-	while (*format)
+	len = 1;
+	while (n >= 10)
 	{
-		if (*format == '%')
-		{
-			format++;
-			count += ft_dispatch_specifier(*format, args);
-		}
-		else
-		{
-			ft_putchar_fd(*format, 1);
-			count++;
-		}
-		format++;
+		n = n / 10;
+		len++;
 	}
-	va_end(args);
-	return (count);
+	return (len);
 }
