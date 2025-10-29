@@ -6,7 +6,7 @@
 /*   By: eina <eina@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 17:54:12 by eina              #+#    #+#             */
-/*   Updated: 2025/10/25 01:26:39 by eina             ###   ########.fr       */
+/*   Updated: 2025/10/28 23:34:54 by eina             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,30 @@
 static int	ft_printaddress(uintptr_t n, int fd, int basecase)
 {
 	char	*base;
+	int		count;
 
+	count = 0;
 	if (basecase == 1)
 		base = "0123456789ABCDEF";
 	else
 		base = "0123456789abcdef";
 	if (n >= 16)
-		ft_printaddress(n / 16, fd, basecase);
+		count += ft_printaddress(n / 16, fd, basecase);
 	ft_putchar_fd(base[n % 16], fd);
-	return (ft_hex_len(n));
+	return (count + 1);
 }
 
-int	ft_printpointer(void *ptr, int fd, int basecase)
+int	ft_printpointer(va_list *args, int fd, int basecase)
 {
 	uintptr_t	n;
+	void		*ptr;
 
+	ptr = va_arg(*args, void *);
 	if (!ptr)
-		return (2 + ft_printstr("0x0", 1));
+	{
+		ft_putstr_fd("0x0", 1);
+		return (2 + ft_strlen("0x0"));
+	}
 	else
 	{
 		n = (uintptr_t)ptr;

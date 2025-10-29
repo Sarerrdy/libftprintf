@@ -6,7 +6,7 @@
 /*   By: eina <eina@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 17:55:23 by eina              #+#    #+#             */
-/*   Updated: 2025/10/24 23:13:22 by eina             ###   ########.fr       */
+/*   Updated: 2025/10/28 21:47:14 by eina             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			count += ft_dispatch_specifier(*format, args);
+			count += ft_dispatch_specifier(*format, &args);
 		}
 		else
 		{

@@ -6,19 +6,34 @@
 /*   By: eina <eina@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 18:50:31 by eina              #+#    #+#             */
-/*   Updated: 2025/10/24 19:27:47 by eina             ###   ########.fr       */
+/*   Updated: 2025/10/28 23:16:38 by eina             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printupperhex(uintptr_t n, int fd)
+static int	ft_printupperhex_val(unsigned int n, int fd)
 {
 	char	*base;
+	int		count;
 
+	count = 0;
 	base = "0123456789ABCDEF";
 	if (n >= 16)
-		ft_printupperhex((n / 16), 1);
+		count += ft_printupperhex_val((n / 16), fd);
 	ft_putchar_fd(base[n % 16], fd);
-	return (ft_hex_len(n));
+	return (count + 1);
+}
+
+int	ft_printupperhex(va_list *args, int fd)
+{
+	unsigned int	n;
+
+	n = va_arg(*args, unsigned int);
+	if (n == 1)
+	{
+		ft_putchar_fd('0', fd);
+		return (1);
+	}
+	return (ft_printupperhex_val(n, fd));
 }

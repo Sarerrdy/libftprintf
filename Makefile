@@ -11,7 +11,6 @@ LIBFT_DIR   := libft
 # Utility source files (listed explicitly)
 UTILS_FILES := \
     ft_dispatch_specifier.c \
-    ft_hex_len.c \
     ft_int_len.c \
     ft_printchar.c \
     ft_printdecimals.c \
@@ -19,8 +18,7 @@ UTILS_FILES := \
     ft_printpointer.c \
     ft_printstr.c \
     ft_printunsignedint.c \
-    ft_printupperhex.c \
-    ft_unsigned_len.c
+    ft_printupperhex.c
 
 # Full source list (excluding main.c)
 SRC := ft_printf.c $(addprefix $(UTILS_DIR)/, $(UTILS_FILES))

@@ -6,16 +6,27 @@
 /*   By: eina <eina@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 11:01:35 by eina              #+#    #+#             */
-/*   Updated: 2025/10/24 17:56:18 by eina             ###   ########.fr       */
+/*   Updated: 2025/10/28 23:43:36 by eina             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printunsignedint(unsigned int val, int fd)
+static int	ft_printunsignedint_val(unsigned int val, int fd)
 {
+	int	count;
+
+	count = 0;
 	if (val >= 10)
-		ft_putnbr_fd(val / 10, fd);
+		count += ft_printunsignedint_val(val / 10, fd);
 	ft_putchar_fd((val % 10) + '0', fd);
-	return (ft_unsigned_len(val));
+	return (count + 1);
+}
+
+int	ft_printunsignedint(va_list *args, int fd)
+{
+	unsigned int val;
+
+	val = va_arg(*args, unsigned int);
+	return (ft_printunsignedint_val(val, fd));
 }
