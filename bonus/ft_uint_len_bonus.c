@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printunsignedint.c                              :+:      :+:    :+:   */
+/*   ft_uint_len_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eina <eina@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/24 11:01:35 by eina              #+#    #+#             */
-/*   Updated: 2025/11/07 12:19:28 by eina             ###   ########.fr       */
+/*   Created: 2025/11/03 07:38:32 by eina              #+#    #+#             */
+/*   Updated: 2025/11/07 11:56:19 by eina             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-static int	ft_printunsignedint_val(unsigned int val, int fd)
+int	ft_uint_len(unsigned int n, int base)
 {
-	int	count;
+	int	len;
 
-	count = 0;
-	if (val >= 10)
-		count += ft_printunsignedint_val(val / 10, fd);
-	ft_putchar_fd((val % 10) + '0', fd);
-	return (count + 1);
-}
-
-int	ft_printunsignedint(va_list *args, int fd)
-{
-	unsigned int	val;
-
-	val = va_arg(*args, unsigned int);
-	return (ft_printunsignedint_val(val, fd));
+	if (base < 2)
+		return (0);
+	if (n == 0)
+		return (1);
+	len = 0;
+	while (n)
+	{
+		n /= base;
+		len++;
+	}
+	return (len);
 }

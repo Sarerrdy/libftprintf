@@ -6,7 +6,7 @@
 /*   By: eina <eina@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 17:54:12 by eina              #+#    #+#             */
-/*   Updated: 2025/10/28 23:34:54 by eina             ###   ########.fr       */
+/*   Updated: 2025/11/03 22:24:35 by eina             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	ft_printpointer(va_list *args, int fd, int basecase)
 	ptr = va_arg(*args, void *);
 	if (!ptr)
 	{
-		ft_putstr_fd("0x0", 1);
-		return (2 + ft_strlen("0x0"));
+		ft_putstr_fd("(nil)", 1);
+		return (ft_strlen("(nil)"));
 	}
 	else
 	{

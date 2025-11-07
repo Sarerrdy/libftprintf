@@ -6,7 +6,7 @@
 /*   By: eina <eina@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 18:50:44 by eina              #+#    #+#             */
-/*   Updated: 2025/10/28 23:01:07 by eina             ###   ########.fr       */
+/*   Updated: 2025/11/07 12:20:20 by eina             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	ft_printlowerhex_val(unsigned int n, int fd)
 
 int	ft_printlowerhex(va_list *args, int fd)
 {
-	unsigned int val;
+	unsigned int	val;
 
 	val = va_arg(*args, unsigned int);
 	if (val == 0)

@@ -1,17 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eina <eina@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 17:55:23 by eina              #+#    #+#             */
-/*   Updated: 2025/11/07 11:58:32 by eina             ###   ########.fr       */
+/*   Updated: 2025/11/07 12:01:34 by eina             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
+#include "ft_printf_bonus.h"
+
+static int	parse_number(const char **p)
+{
+	int	n;
+
+	n = 0;
+	while (ft_isdigit(**p))
+		n = n * 10 + (*(*p)++ - '0');
+	return (n);
+}
+
+static const char	*parse_fmt(const char *p, t_fmt *fmt)
+{
+	fmt->left = 0;
+	fmt->zero = 0;
+	fmt->width = -1;
+	fmt->precision = -1;
+	while (*p == '-' || *p == '0')
+	{
+		if (*p == '-')
+			fmt->left = 1;
+		if (*p == '0')
+			fmt->zero = 1;
+		p++;
+	}
+	if (fmt->left)
+		fmt->zero = 0;
+	if (ft_isdigit(*p))
+		fmt->width = parse_number(&p);
+	if (*p == '.')
+	{
+		p++;
+		fmt->precision = parse_number(&p);
+	}
+	return (p);
+}
 
 static int	cleanup_and_error(va_list *args)
 {
@@ -19,11 +54,26 @@ static int	cleanup_and_error(va_list *args)
 	return (-1);
 }
 
+static int	parse_and_dispatch(const char **p, va_list *args, t_fmt *fmt)
+{
+	int	ret;
+
+	*p = parse_fmt(++(*p), fmt);
+	if (!**p)
+		return (cleanup_and_error(args));
+	ret = ft_dispatch_specifier(**p, args, fmt);
+	if (ret < 0)
+		return (cleanup_and_error(args));
+	(*p)++;
+	return (ret);
+}
+
 int	ft_printf(const char *format, ...)
 {
 	int		count;
 	int		ret;
 	va_list	args;
+	t_fmt	fmt;
 
 	if (!format)
 		return (0);
@@ -33,16 +83,13 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
-			if (!*(++format))
-				return (cleanup_and_error(&args));
-			ret = ft_dispatch_specifier(*format, &args);
+			ret = parse_and_dispatch(&format, &args, &fmt);
 			if (ret < 0)
 				return (cleanup_and_error(&args));
 			count += ret;
 		}
 		else
-			count += write(1, format, 1);
-		format++;
+			count += write(1, format++, 1);
 	}
 	va_end(args);
 	return (count);

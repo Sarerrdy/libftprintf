@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printunsignedint.c                              :+:      :+:    :+:   */
+/*   ft_print_pad_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eina <eina@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/24 11:01:35 by eina              #+#    #+#             */
-/*   Updated: 2025/11/07 12:19:28 by eina             ###   ########.fr       */
+/*   Created: 2025/11/01 18:05:32 by eina              #+#    #+#             */
+/*   Updated: 2025/11/07 12:16:15 by eina             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
-static int	ft_printunsignedint_val(unsigned int val, int fd)
+int	ft_print_pad(char padc, int len, int fd)
 {
-	int	count;
+	int	i;
 
-	count = 0;
-	if (val >= 10)
-		count += ft_printunsignedint_val(val / 10, fd);
-	ft_putchar_fd((val % 10) + '0', fd);
-	return (count + 1);
-}
-
-int	ft_printunsignedint(va_list *args, int fd)
-{
-	unsigned int	val;
-
-	val = va_arg(*args, unsigned int);
-	return (ft_printunsignedint_val(val, fd));
+	i = 0;
+	while (i < len)
+	{
+		ft_putchar_fd(padc, fd);
+		i++;
+	}
+	return (len);
 }
