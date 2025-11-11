@@ -8,6 +8,7 @@ RM := rm -f
 LIBFT_DIR := libft
 INCLUDES := -I. -I$(LIBFT_DIR)
 
+# Mandatory sources
 SRC_UTILS := \
     utils/ft_dispatch_specifier.c \
     utils/ft_int_len.c \
@@ -22,6 +23,7 @@ SRC_UTILS := \
 SRCS := ft_printf.c $(SRC_UTILS)
 OBJS := $(SRCS:.c=.o)
 
+# Bonus sources
 SRC_BONUS := \
     bonus/ft_dispatch_specifier_bonus.c \
     bonus/ft_print_pad_bonus.c \
@@ -33,39 +35,48 @@ SRC_BONUS := \
     bonus/ft_printstr_bonus.c \
     bonus/ft_printunsignedint_bonus.c \
     bonus/ft_printupperhex_bonus.c \
-    bonus/ft_uint_len_bonus.c \
+    bonus/ft_uint_len_bonus.c
 
 SRCS_B := ft_printf_bonus.c $(SRC_BONUS)
 BONUS_OBJS := $(SRCS_B:.c=.o)
 
-.PHONY: all libft bonus clean fclean re clean_mandatory clean_bonus
+# Marker files
+MANDATORY_MARKER := .mandatory_build
+BONUS_MARKER := .bonus_build
 
-all: libft $(NAME)
+.PHONY: all bonus clean fclean re libft
+
+# Default build: mandatory
+all: libft $(MANDATORY_MARKER)
+
+# Bonus build
+bonus: libft $(BONUS_MARKER)
+
+# Mandatory build rule (marker runs ar)
+$(MANDATORY_MARKER): $(OBJS) $(LIBFT_DIR)/libft.a
+	@$(RM) $(NAME)
+	$(AR) $(ARFLAGS) $(NAME) $^
+	@touch $@
+	@$(RM) $(BONUS_MARKER)
+
+# Bonus build rule (marker runs ar)
+$(BONUS_MARKER): $(BONUS_OBJS) $(LIBFT_DIR)/libft.a
+	@$(RM) $(NAME)
+	$(AR) $(ARFLAGS) $(NAME) $^
+	@touch $@
+	@$(RM) $(MANDATORY_MARKER)
 
 libft:
 	@$(MAKE) -C $(LIBFT_DIR)
 
-$(NAME): $(OBJS)
-	$(RM) $(NAME)
-	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
-	$(AR) $(ARFLAGS) $(NAME) $(LIBFT_DIR)/*.o
-
-bonus: libft $(BONUS_OBJS)
-	$(RM) $(NAME)
-	$(AR) $(ARFLAGS) $(NAME) $(BONUS_OBJS)
-	$(AR) $(ARFLAGS) $(NAME) $(LIBFT_DIR)/*.o
-
 %.o: %.c ft_printf.h
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-%_bonus.o: %_bonus.c ft_printf_bonus.h
-	$(CC) $(CFLAGS) -DBONUS $(INCLUDES) -c $< -o $@
 
 bonus/%.o: bonus/%.c ft_printf_bonus.h
 	$(CC) $(CFLAGS) -DBONUS $(INCLUDES) -c $< -o $@
 
 clean:
-	$(RM) $(OBJS) $(BONUS_OBJS)
+	$(RM) $(OBJS) $(BONUS_OBJS) $(MANDATORY_MARKER) $(BONUS_MARKER)
 	@$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean

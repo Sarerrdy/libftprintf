@@ -6,13 +6,13 @@
 /*   By: eina <eina@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 17:59:44 by eina              #+#    #+#             */
-/*   Updated: 2025/11/07 10:52:55 by eina             ###   ########.fr       */
+/*   Updated: 2025/11/11 13:55:04 by eina             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
 
-
-/* #include <stdio.h>
+#include <stdio.h>
 #include "ft_printf_bonus.h"
 
 int main(void)
@@ -73,7 +73,7 @@ int main(void)
     printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
 
     return 0;
-}  */
+} */
 
 /////////////BONUS/////////////////////////////
 
