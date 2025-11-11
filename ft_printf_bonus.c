@@ -6,7 +6,7 @@
 /*   By: eina <eina@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 17:55:23 by eina              #+#    #+#             */
-/*   Updated: 2025/11/07 12:01:34 by eina             ###   ########.fr       */
+/*   Updated: 2025/11/11 18:36:14 by eina             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	ft_printf(const char *format, ...)
 	t_fmt	fmt;
 
 	if (!format)
-		return (0);
+		return (-1);
 	va_start(args, format);
 	count = 0;
 	while (*format)

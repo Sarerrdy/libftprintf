@@ -6,7 +6,7 @@
 /*   By: eina <eina@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 17:59:44 by eina              #+#    #+#             */
-/*   Updated: 2025/11/11 13:55:04 by eina             ###   ########.fr       */
+/*   Updated: 2025/11/11 18:39:21 by eina             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,11 +133,21 @@ int main(void)
     // %% with width and left flag
     ret_std = printf("STD: %% = [%-5s]\n", "%");
     ret_ft  = ft_printf("FT : %% = [%-5s]\n", "%");
-
     printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    // %p with width
+    ret_std = printf("STD: %%p = [%20p]\n", ptr);
+    ret_ft  = ft_printf("FT : %%p = [%20p]\n", ptr);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+        // %p with width
+    // ret_std = printf(NULL);
+    // ret_ft  = ft_printf(NULL);
+    // printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
 
     return 0;
 }
+
 
 
 
