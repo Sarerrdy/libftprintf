@@ -68,7 +68,11 @@ int ft_printf(const char *format, ...);
 The first bonus implemented extends `ft_printf` with flag management:
 - `-` → left alignment  
 - `0` → zero padding  
-- `.` → precision  
+- `.` → precision 
+- `+` → plus 
+- ` ` → space 
+- `#` → alternate  
+
 - minimum field width → applied to all conversions 
 ```
 
