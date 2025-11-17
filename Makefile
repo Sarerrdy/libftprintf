@@ -53,16 +53,18 @@ all: libft $(MANDATORY_MARKER)
 bonus: libft $(BONUS_MARKER)
 
 # Mandatory build rule (marker runs ar)
-$(MANDATORY_MARKER): $(OBJS) $(LIBFT_DIR)/libft.a
+$(MANDATORY_MARKER): $(OBJS)
+	@$(MAKE) -C $(LIBFT_DIR)
 	@$(RM) $(NAME)
-	$(AR) $(ARFLAGS) $(NAME) $^
+	$(AR) $(ARFLAGS) $(NAME) $^ $(LIBFT_DIR)/*.o
 	@touch $@
 	@$(RM) $(BONUS_MARKER)
 
 # Bonus build rule (marker runs ar)
-$(BONUS_MARKER): $(BONUS_OBJS) $(LIBFT_DIR)/libft.a
+$(BONUS_MARKER): $(BONUS_OBJS)
+	@$(MAKE) -C $(LIBFT_DIR)
 	@$(RM) $(NAME)
-	$(AR) $(ARFLAGS) $(NAME) $^
+	$(AR) $(ARFLAGS) $(NAME) $^ $(LIBFT_DIR)/*.o
 	@touch $@
 	@$(RM) $(MANDATORY_MARKER)
 

@@ -6,7 +6,7 @@
 /*   By: eina <eina@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 11:06:17 by eina              #+#    #+#             */
-/*   Updated: 2025/11/08 00:48:24 by eina             ###   ########.fr       */
+/*   Updated: 2025/11/17 00:49:35 by eina             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	ft_dprintparser(int sint, int vals[2], t_fmt *fmt, int fd)
 	if (!fmt->left)
 		total += ft_print_pad(' ', vals[1], fd);
 	print_sign(negative, fd, &total);
-	if (fmt->precision >= 0)
+	if (fmt->precision > vals[0])
 		total += ft_print_pad('0', fmt->precision - vals[0], fd);
 	if (!(sint == 0 && fmt->precision == 0))
 		total += ft_putnbr_abs_fd(n, fd);
@@ -87,16 +87,14 @@ int	ft_printdecimals(va_list *args, int fd, t_fmt *fmt)
 		numlen = ft_int_len(-sint);
 	else
 		numlen = ft_int_len(sint);
+	len = numlen;
 	if (fmt->precision > numlen)
 		len = fmt->precision;
-	else
-		len = numlen;
 	if (sint < 0)
 		len++;
 	vals[0] = numlen;
+	vals[1] = 0;
 	if (fmt->width > len)
 		vals[1] = fmt->width - len;
-	else
-		vals[1] = 0;
 	return (ft_dprintparser(sint, vals, fmt, fd));
 }

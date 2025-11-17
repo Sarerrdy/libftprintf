@@ -6,7 +6,7 @@
 /*   By: eina <eina@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 18:50:31 by eina              #+#    #+#             */
-/*   Updated: 2025/11/07 11:56:50 by eina             ###   ########.fr       */
+/*   Updated: 2025/11/17 01:24:46 by eina             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static int	ft_hexuprintparser(unsigned int val, int vals[2], t_fmt *fmt,
 	total = 0;
 	if (!fmt->left && !(fmt->zero && fmt->precision < 0))
 		total += ft_print_pad(' ', vals[1], fd);
-	if (fmt->precision >= 0)
+	if (fmt->precision > vals[0])
 		total += ft_print_pad('0', fmt->precision - vals[0], fd);
-	else if (fmt->zero && !fmt->left)
+	else if (fmt->zero && fmt->precision < 0 && !fmt->left)
 		total += ft_print_pad('0', vals[1], fd);
 	if (!(val == 0 && fmt->precision == 0))
 		total += ft_printupperhex_val(val, fd);
