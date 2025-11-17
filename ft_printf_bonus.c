@@ -6,44 +6,57 @@
 /*   By: eina <eina@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 17:55:23 by eina              #+#    #+#             */
-/*   Updated: 2025/11/11 18:36:14 by eina             ###   ########.fr       */
+/*   Updated: 2025/11/17 10:09:04 by eina             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-static int	parse_number(const char **p)
+static const char	*parse_flags(const char *p, t_fmt *fmt)
 {
-	int	n;
-
-	n = 0;
-	while (ft_isdigit(**p))
-		n = n * 10 + (*(*p)++ - '0');
-	return (n);
-}
-
-static const char	*parse_fmt(const char *p, t_fmt *fmt)
-{
-	fmt->left = 0;
-	fmt->zero = 0;
-	fmt->width = -1;
-	fmt->precision = -1;
-	while (*p == '-' || *p == '0')
+	while (*p == '-' || *p == '0' || *p == '+' || *p == ' ' || *p == '#')
 	{
 		if (*p == '-')
 			fmt->left = 1;
-		if (*p == '0')
+		else if (*p == '0')
 			fmt->zero = 1;
+		else if (*p == '+')
+			fmt->plus = 1;
+		else if (*p == ' ')
+			fmt->space = 1;
+		else if (*p == '#')
+			fmt->alt = 1;
 		p++;
 	}
 	if (fmt->left)
 		fmt->zero = 0;
+	return (p);
+}
+
+static const char	*parse_fmt(const char *p, t_fmt *fmt, int n)
+{
+	fmt->left = 0;
+	fmt->zero = 0;
+	fmt->plus = 0;
+	fmt->space = 0;
+	fmt->alt = 0;
+	fmt->width = -1;
+	fmt->precision = -1;
+	p = parse_flags(p, fmt);
 	if (ft_isdigit(*p))
-		fmt->width = parse_number(&p);
+	{
+		n = 0;
+		while (ft_isdigit(*p))
+			n = n * 10 + (*p++ - '0');
+		fmt->width = n;
+	}
 	if (*p == '.')
 	{
+		n = 0;
 		p++;
-		fmt->precision = parse_number(&p);
+		while (ft_isdigit(*p))
+			n = n * 10 + (*p++ - '0');
+		fmt->precision = n;
 	}
 	return (p);
 }
@@ -57,8 +70,10 @@ static int	cleanup_and_error(va_list *args)
 static int	parse_and_dispatch(const char **p, va_list *args, t_fmt *fmt)
 {
 	int	ret;
+	int	n;
 
-	*p = parse_fmt(++(*p), fmt);
+	n = 0;
+	*p = parse_fmt(++(*p), fmt, n);
 	if (!**p)
 		return (cleanup_and_error(args));
 	ret = ft_dispatch_specifier(**p, args, fmt);

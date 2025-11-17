@@ -6,7 +6,7 @@
 /*   By: eina <eina@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 14:46:27 by eina              #+#    #+#             */
-/*   Updated: 2025/11/07 12:04:14 by eina             ###   ########.fr       */
+/*   Updated: 2025/11/17 09:09:57 by eina             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ typedef struct s_fmt
 	int	zero;
 	int	width;
 	int	precision;
+	int	plus;
+	int	space;
+	int	alt;
 }		t_fmt;
 
 int		ft_int_len(int n);

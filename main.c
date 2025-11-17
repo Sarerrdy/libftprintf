@@ -1,17 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: eina <eina@student.42vienna.com>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/24 17:59:44 by eina              #+#    #+#             */
-/*   Updated: 2025/11/17 01:38:37 by eina             ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
-/*
-
+/* 
 #include <stdio.h>
 #include "ft_printf_bonus.h"
 
@@ -21,9 +9,9 @@ int main(void)
     void *ptr = (void *)0x1234abcd;
     char *str = "Hello, 42!";
     unsigned int u = 4294967295;
-    // int d = -2147483648;
+    int d = -2147483648;
     int i = 42;
-    int d = -42;
+    // int d = -42;
     char c = 'A';
 
     // %c
@@ -77,7 +65,7 @@ int main(void)
 
 /////////////BONUS/////////////////////////////
 
-/*
+/* 
 #include <stdio.h>
 #include "ft_printf_bonus.h"
 
@@ -147,19 +135,17 @@ int main(void)
     ret_ft  = ft_printf("FT : %%p = [%20p]\n", ptr);
     printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
 
-        // %p with width
-    // ret_std = printf(NULL);
-    // ret_ft  = ft_printf(NULL);
-    // printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+    // %p with width
+    ret_std = printf(NULL);
+    ret_ft  = ft_printf(NULL);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
 
     return 0;
-}
-*/
+} */
 
 
 
-
-/////////////////////////////////////// NULLS AND SOME SPECIAL CASES  ////////////////////////////////////
+/////////////////////  NULLS AND SOME SPECIAL CASES  ////////////////////////////////////
 
 
 //mandantory
@@ -308,7 +294,7 @@ int main(void)
     return (0);
 } */
 
-///////////////////////////// PRECIDION - UNSIGNED INT /////////////
+///////////////////////////// PRECISION - UNSIGNED INT /////////////
 /* #include <stdio.h>
 #include "ft_printf_bonus.h"
 
@@ -365,6 +351,8 @@ int main(void)
 
  */
 
+ //////////////////////////// PRECISION - HEX /////////
+/* 
  #include <stdio.h>
 #include "ft_printf_bonus.h"
 
@@ -465,4 +453,221 @@ int main(void)
     printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
 
     return 0;
-}
+} */
+
+//////////////////////////// PRECISION, PLUS AND SPACE /////////
+/* 
+#include <stdio.h>
+#include "ft_printf_bonus.h"
+
+int main(void)
+{
+    int ret_std, ret_ft;
+    int d = 42;
+
+    // --- Precision only ---
+    ret_std = printf("STD: [%.0d]\n", d);
+    ret_ft  = ft_printf("FT : [%.0d]\n", d);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    ret_std = printf("STD: [%.2d]\n", d);
+    ret_ft  = ft_printf("FT : [%.2d]\n", d);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    // --- Width + precision ---
+    ret_std = printf("STD: [%8.0d]\n", d);
+    ret_ft  = ft_printf("FT : [%8.0d]\n", d);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    ret_std = printf("STD: [%8.2d]\n", d);
+    ret_ft  = ft_printf("FT : [%8.2d]\n", d);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    ret_std = printf("STD: [%8.5d]\n", d);
+    ret_ft  = ft_printf("FT : [%8.5d]\n", d);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    // --- Zero flag + width + precision ---
+    ret_std = printf("STD: [%08.0d]\n", d);
+    ret_ft  = ft_printf("FT : [%08.0d]\n", d);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    ret_std = printf("STD: [%08.2d]\n", d);
+    ret_ft  = ft_printf("FT : [%08.2d]\n", d);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    ret_std = printf("STD: [%08.5d]\n", d);
+    ret_ft  = ft_printf("FT : [%08.5d]\n", d);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    // --- Left flag (-) + width + precision ---
+    ret_std = printf("STD: [%-8.0d]\n", d);
+    ret_ft  = ft_printf("FT : [%-8.0d]\n", d);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    ret_std = printf("STD: [%-8.2d]\n", d);
+    ret_ft  = ft_printf("FT : [%-8.2d]\n", d);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    ret_std = printf("STD: [%-8.5d]\n", d);
+    ret_ft  = ft_printf("FT : [%-8.5d]\n", d);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    // --- Negative value tests ---
+    d = -42;
+    ret_std = printf("STD: [%8.3d]\n", d);
+    ret_ft  = ft_printf("FT : [%8.3d]\n", d);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    ret_std = printf("STD: [%08.3d]\n", d);
+    ret_ft  = ft_printf("FT : [%08.3d]\n", d);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    ret_std = printf("STD: [%-8.3d]\n", d);
+    ret_ft  = ft_printf("FT : [%-8.3d]\n", d);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    // --- PLUS flag tests ---
+    d = 42;
+    ret_std = printf("STD: [%+d]\n", d);
+    ret_ft  = ft_printf("FT : [%+d]\n", d);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    d = -42;
+    ret_std = printf("STD: [%+d]\n", d);
+    ret_ft  = ft_printf("FT : [%+d]\n", d);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    // --- SPACE flag tests ---
+    d = 42;
+    ret_std = printf("STD: [% d]\n", d);
+    ret_ft  = ft_printf("FT : [% d]\n", d);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    d = -42;
+    ret_std = printf("STD: [% d]\n", d);
+    ret_ft  = ft_printf("FT : [% d]\n", d);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    // --- Width + PLUS/SPACE ---
+    d = 42;
+    ret_std = printf("STD: [%+8d]\n", d);
+    ret_ft  = ft_printf("FT : [%+8d]\n", d);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+       d = 42;
+    ret_std = printf("STD: [%+8.0d]\n", d);
+    ret_ft  = ft_printf("FT : [%+8.0d]\n", d);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+       d = 42;
+    ret_std = printf("STD: [%+8.d]\n", d);
+    ret_ft  = ft_printf("FT : [%+8.d]\n", d);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+       d = 42;
+    ret_std = printf("STD: [%+8.1d]\n", d);
+    ret_ft  = ft_printf("FT : [%+8.1d]\n", d);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+       d = 42;
+    ret_std = printf("STD: [%+8.4d]\n", d);
+    ret_ft  = ft_printf("FT : [%+8.4d]\n", d);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+       d = 42;
+    ret_std = printf("STD: [%+08.4d]\n", d);
+    ret_ft  = ft_printf("FT : [%+08.4d]\n", d);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    ret_std = printf("STD: [% d]\n", d);
+    ret_ft  = ft_printf("FT : [% d]\n", d);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    return (0);
+} */
+
+//////////////////////////// ALTERNATE (#) /////////
+/* #include <stdio.h>
+#include "ft_printf_bonus.h"
+
+int main(void)
+{
+    unsigned int hx = 0x2a; 
+    unsigned int big = 0xFFFFFFFF; 
+    int ret_std, ret_ft;
+
+    // --- Basic # flag ---
+    ret_std = printf("STD: %%#x = [%#x]\n", hx);
+    ret_ft  = ft_printf("FT : %%#x = [%#x]\n", hx);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    ret_std = printf("STD: %%#X = [%#X]\n", hx);
+    ret_ft  = ft_printf("FT : %%#X = [%#X]\n", hx);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    // --- Width + # ---
+    ret_std = printf("STD: %%#10x = [%#10x]\n", hx);
+    ret_ft  = ft_printf("FT : %%#10x = [%#10x]\n", hx);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    ret_std = printf("STD: %%#10X = [%#10X]\n", hx);
+    ret_ft  = ft_printf("FT : %%#10X = [%#10X]\n", hx);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    // --- Zero flag + # ---
+    ret_std = printf("STD: %%#010x = [%#010x]\n", hx);
+    ret_ft  = ft_printf("FT : %%#010x = [%#010x]\n", hx);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    ret_std = printf("STD: %%#010X = [%#010X]\n", hx);
+    ret_ft  = ft_printf("FT : %%#010X = [%#010X]\n", hx);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    // --- Precision + # ---
+    ret_std = printf("STD: %%#.5x = [%#.5x]\n", hx);
+    ret_ft  = ft_printf("FT : %%#.5x = [%#.5x]\n", hx);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    ret_std = printf("STD: %%#.5X = [%#.5X]\n", hx);
+    ret_ft  = ft_printf("FT : %%#.5X = [%#.5X]\n", hx);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    // --- Width + precision + # ---
+    ret_std = printf("STD: %%#10.5x = [%#10.5x]\n", hx);
+    ret_ft  = ft_printf("FT : %%#10.5x = [%#10.5x]\n", hx);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    ret_std = printf("STD: %%#10.5X = [%#10.5X]\n", hx);
+    ret_ft  = ft_printf("FT : %%#10.5X = [%#10.5X]\n", hx);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    // --- Left align + # ---
+    ret_std = printf("STD: %%#-10x = [%#-10x]\n", hx);
+    ret_ft  = ft_printf("FT : %%#-10x = [%#-10x]\n", hx);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    ret_std = printf("STD: %%#-10X = [%#-10X]\n", hx);
+    ret_ft  = ft_printf("FT : %%#-10X = [%#-10X]\n", hx);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    // --- Edge case: value = 0 with # ---
+    ret_std = printf("STD: %%#.0x = [%#.0x]\n", 0u);
+    ret_ft  = ft_printf("FT : %%#.0x = [%#.0x]\n", 0u);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    ret_std = printf("STD: %%#.0X = [%#.0X]\n", 0u);
+    ret_ft  = ft_printf("FT : %%#.0X = [%#.0X]\n", 0u);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    // --- Large value with # ---
+    ret_std = printf("STD: %%#x = [%#x]\n", big);
+    ret_ft  = ft_printf("FT : %%#x = [%#x]\n", big);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    ret_std = printf("STD: %%#X = [%#X]\n", big);
+    ret_ft  = ft_printf("FT : %%#X = [%#X]\n", big);
+    printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
+
+    return 0;
+} */
