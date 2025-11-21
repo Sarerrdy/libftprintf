@@ -456,22 +456,22 @@ int main(void)
 } */
 
 //////////////////////////// PRECISION, PLUS AND SPACE /////////
-/* 
+
 #include <stdio.h>
 #include "ft_printf_bonus.h"
 
 int main(void)
 {
     int ret_std, ret_ft;
-    int d = 42;
+    int d = -42;
 
     // --- Precision only ---
     ret_std = printf("STD: [%.0d]\n", d);
     ret_ft  = ft_printf("FT : [%.0d]\n", d);
     printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
 
-    ret_std = printf("STD: [%.2d]\n", d);
-    ret_ft  = ft_printf("FT : [%.2d]\n", d);
+    ret_std = printf("STD: [%.4d]\n", 0);
+    ret_ft  = ft_printf("FT : [%.4d]\n", 0);
     printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
 
     // --- Width + precision ---
@@ -585,7 +585,7 @@ int main(void)
     printf("Return STD: %d | FT: %d\n\n", ret_std, ret_ft);
 
     return (0);
-} */
+}
 
 //////////////////////////// ALTERNATE (#) /////////
 /* #include <stdio.h>
